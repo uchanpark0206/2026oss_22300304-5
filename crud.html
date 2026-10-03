@@ -11,15 +11,34 @@
                 count--;
 
             }
+            function edit(e) {//젤 어려움
+                const a = e.target.parentElement.parentElement;//쓰임을 아직 잘 모르겠음
+                //에딧에서는 datalist를 쓰면 안됨>>datalist는 사용할떄마다 갱신되어 마지막에 남는것만 기억함!!
+                let newdata = []
+                newdata[1] = a.children[1].textContent;
+                newdata[2] = a.children[2].textContent;
+                newdata[3] = a.children[3].textContent;
+                newdata[4] = a.children[4].textContent;
+
+                name.value = newdata[1];
+                singer.value = newdata[2];
+                produser.value = newdata[3];
+                genre.value = newdata[4];
+            }
             const name = document.querySelector("#name")
             const singer = document.querySelector("#singer")
             const produser = document.querySelector("#produser")
             const genre = document.querySelector("#genre")
             const add = document.querySelector("#btn1")
             const reset = document.querySelector("#btn2")
-
+            
+            //디폴트 테이블의 삭제버튼
             const bt1 = document.querySelector("#bt1")
             const bt2 = document.querySelector("#bt2")
+
+            //디폴트 테이블의 수정버튼
+            const bt3 = document.querySelector("#bt3")
+            const bt4 = document.querySelector("#bt4")
 
             const table = document.querySelector("#table")
 
@@ -29,6 +48,10 @@
             //const datalist = {"id","제목","가수","작곡가","장르"}>>오류 중괄호 쓰면 됨!!오직 대괄호!!
             bt1.addEventListener("click", remove);
             bt2.addEventListener("click", remove);
+
+            bt3.addEventListener("click", edit);
+            bt4.addEventListener("click", edit);
+
             let count = 2; //변경될거여서 let을 써야함(자주 까먹음)
             //대괄호를 쓰면 표에서 NaN뜸>>>>> 자바스크립트에서는 Number[0]을 숫자로 인식하지 않음.
             //애초에 변수 선언시 Number()을 안 써도 됨!!
@@ -67,7 +90,7 @@
                 btn1.textContent = "수정";
                 td6.appendChild(btn1);//굳이 t6를 다시 만듦!!
                 tr.appendChild(td6);
-                //btn1.addEventListener("click",);
+                btn1.addEventListener("click", edit);
 
                 const btn2 = document.createElement("button");//버튼 앞에 #붙이면 안
                 btn2.textContent = "삭제";
@@ -134,7 +157,7 @@
                         <th>b</th>
                         <th>c</th>
                         <th>d</th>
-                        <th><button id=bt1>수정 </button></th>
+                        <th><button id=bt3>수정 </button></th>
                         <th><button id=bt1>삭제 </button></th>
                     </tr>
                     <tr>
@@ -143,7 +166,7 @@
                         <th>ㄴ</th>
                         <th>ㄷ</th>
                         <th>ㄹ</th>
-                        <th><button id=bt1>수정 </button></th>
+                        <th><button id=bt4>수정 </button></th>
                         <th><button id=bt2>삭제 </button></th><!--.parentElement를 한번만 사용하면 boutton만 삭제됨-->
                     </tr>
 
