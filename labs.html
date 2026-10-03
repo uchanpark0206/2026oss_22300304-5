@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>수업중 실습한것도 과제에 내야함!!</title>
+
+
+
+
+
 </head>
+
 <body>
- <!--
+    <!--
     자바 스크립트
     변수선언
     보통 const로 설언하고 값을 변경 할 때 let을 씀(var은 잘 안 쓰임)
@@ -29,42 +36,117 @@
 
 ***dom 중요***
     -->
-<!--계산기-->
-<input type="text" id="num1">
-<input type="text" id="num2">
-<button id ="button" onclick="add()">+</button>
-<input type="text" id="sum">
-<br>
-<br>
-<!--클릭-->
-<button id = "bt" onclick="clickMe()">Click Me</button><br>
-
-<h3> inline JS</h3>
-<button id = "bt2" >Click Me</button><br>
-<script>
+    <!--액션  -->
 
 
 
-    //1번
-    function add() {
-    const num1 = document.getElementById('num1').value;
-    const num2 = document.getElementById('num2').value;
-    document.getElementById('sum').value = Number(num1) + Number(num2);
 
-    }
-//2번
-    function clickMe() {
-        //const bt = document.getElementById("bt");
-        const bt = document.querySelector("#bt");
-        bt.innerHTML = "<h2>버튼이 클릭됨<h2>";
-        alert("클릭 확인")
-    }
-    ///3번
-const click2 = document.querySelector("#bt2");
-click2.addEventListener("click",function(){
-    click2.innerHTML = "<h2>버튼 클릭이 확인됨</h2>";
-});
-</script>
+    <!--계산기-->
+    <input type="text" id="num1">
+    <input type="text" id="num2">
+    <button id="button" onclick="add()">+</button>
+    <input type="text" id="sum">
+    <br>
+    <br>
+    <!--클릭-->
+    <h3>inline</h3>
+    <button id="bt" onclick="ClickMe()">Click Me</button><br>
+
+    <h3> internal JS<br> 방식1</h3>
+    <button id="bt2">Click Me</button><br>
+
+    <h3>방식 2</h3>
+    <button id="bt3">Click Me</button><br>
+    <br>
+    <!--alt shift f란?>>>정렬?-->
+    <form action="form_ok.php">
+        이름<br>
+        <input name="username" id="username" type="text">><br>
+        <br>
+        비밀번호<br>
+        <input name="password" id="password" type="password" maxlength="8" minlength='6'></intput><br>
+        <br>
+        <button type="submit">제출</button><br>
+        <div>
+
+        </div>
+
+
+
+
+
+    </fome>
+
+
+    <script>
+
+        //1번 계산기
+        function add() {
+            const num1 = document.getElementById('num1').value;
+            const num2 = document.getElementById('num2').value;
+            document.getElementById('sum').value = Number(num1) + Number(num2);
+
+        }
+        //1번 
+        function ClickMe() {
+            //const bt = document.getElementById("bt");
+            const bt = document.querySelector("#bt");
+            bt.innerHTML = "<h2>버튼이 클릭됨<h2>"; 
+            alert("클릭 확인")
+        }
+        //2번
+        const bt2 = document.querySelector("#bt2");
+        function clickMe() {
+            //const bt = document.getElementById("bt");
+            bt2.innerHTML = "<h2>버튼이 클릭됨<h2>";    
+            alert("방식 1 클릭 확인")//작동을 안하는 이유?
+        }
+        bt2.addEventListener("click", clickMe);
+
+        ///3번 >>> 2번과 완전히 같은 방식으로 작용함
+        const bt3 = document.querySelector("#bt3");
+        bt3.addEventListener("click", function () {
+            bt3.innerHTML = "<h2>방식 2 버튼 클릭이 확인됨</h2>";
+        });
+        /*
+        5-2주차
+        
+        
+        공부 할때 한 내용
+        1)
+        function checkForm(event) {
+            event.preventDefault();
+            alert("제출되었습니다!");
+        }
+        
+        form.addEventListener("submit", checkForm);
+        
+        
+        2)
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("제출되었습니다!");
+        });
+        
+        두개가 완전히 같은 방식으로 작동함
+        
+        
+        
+        
+        
+        
+        */
+
+        //4
+       form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("제출되었습니다!");
+        });
+        
+
+
+    </script>
 
 </body>
+
 </html>

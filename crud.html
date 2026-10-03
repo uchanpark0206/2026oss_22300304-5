@@ -14,16 +14,13 @@
             function edit(e) {//젤 어려움
                 const a = e.target.parentElement.parentElement;//쓰임을 아직 잘 모르겠음
                 //에딧에서는 datalist를 쓰면 안됨>>datalist는 사용할떄마다 갱신되어 마지막에 남는것만 기억함!!
-                let newdata = []
-                newdata[1] = a.children[1].textContent;
-                newdata[2] = a.children[2].textContent;
-                newdata[3] = a.children[3].textContent;
-                newdata[4] = a.children[4].textContent;
+                newdata=a;
+                name.value = a.children[1].textContent;
+                singer.value = a.children[2].textContent;
+                produser.value = a.children[3].textContent;
+                genre.value = a.children[4].textContent;
 
-                name.value = newdata[1];
-                singer.value = newdata[2];
-                produser.value = newdata[3];
-                genre.value = newdata[4];
+
             }
             const name = document.querySelector("#name")
             const singer = document.querySelector("#singer")
@@ -31,7 +28,7 @@
             const genre = document.querySelector("#genre")
             const add = document.querySelector("#btn1")
             const reset = document.querySelector("#btn2")
-            
+
             //디폴트 테이블의 삭제버튼
             const bt1 = document.querySelector("#bt1")
             const bt2 = document.querySelector("#bt2")
@@ -43,6 +40,9 @@
             const table = document.querySelector("#table")
 
             const id = 1
+
+            let newdata = null;
+
 
             const datalist = [id, name, singer, produser, genre]
             //const datalist = {"id","제목","가수","작곡가","장르"}>>오류 중괄호 쓰면 됨!!오직 대괄호!!
@@ -57,46 +57,61 @@
             //애초에 변수 선언시 Number()을 안 써도 됨!!
 
             add.addEventListener("click", function () {
-                const tr = document.createElement("tr");
-                const td1 = document.createElement("td")//.createElement("td")의tr은 html에서 쓰는 테그임!!>>내가 지정한거 쓰면 안됨ex)t1(X)
-                const td2 = document.createElement("td");
-                const td3 = document.createElement("td");
-                const td4 = document.createElement("td");
-                const td5 = document.createElement("td");
-                const td6 = document.createElement("td");
-                const td7 = document.createElement("td");
-                count++;
-                datalist[0] = count;
-                datalist[1] = name.value;
-                datalist[2] = singer.value;
-                datalist[3] = produser.value;
-                datalist[4] = genre.value;
+                if (newdata == null) {
+                    //새로운 '칸'만들기
+                    const tr = document.createElement("tr");
+                    const td1 = document.createElement("td")//.createElement("td")의tr은 html에서 쓰는 테그임!!>>내가 지정한거 쓰면 안됨ex)t1(X)
+                    const td2 = document.createElement("td");
+                    const td3 = document.createElement("td");
+                    const td4 = document.createElement("td");
+                    const td5 = document.createElement("td");
+                    const td6 = document.createElement("td");
+                    const td7 = document.createElement("td");
+                    count++;// id의 번호를 변화시키기 위해
 
-                td1.textContent = datalist[0];
-                td2.textContent = datalist[1];
-                td3.textContent = datalist[2];
-                td4.textContent = datalist[3];
-                td5.textContent = datalist[4];
+                    //데이터를 넣음
+                    datalist[0] = count;
+                    datalist[1] = name.value;
+                    datalist[2] = singer.value;
+                    datalist[3] = produser.value;
+                    datalist[4] = genre.value;
+
+                    td1.textContent = datalist[0];
+                    td2.textContent = datalist[1];
+                    td3.textContent = datalist[2];
+                    td4.textContent = datalist[3];
+                    td5.textContent = datalist[4];
 
 
 
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                tr.appendChild(td3);
-                tr.appendChild(td4);
-                tr.appendChild(td5);
-                table.appendChild(tr);
-                const btn1 = document.createElement("button");
-                btn1.textContent = "수정";
-                td6.appendChild(btn1);//굳이 t6를 다시 만듦!!
-                tr.appendChild(td6);
-                btn1.addEventListener("click", edit);
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    tr.appendChild(td4);
+                    tr.appendChild(td5);
+                    table.appendChild(tr);
 
-                const btn2 = document.createElement("button");//버튼 앞에 #붙이면 안
-                btn2.textContent = "삭제";
-                td7.appendChild(btn2);//굳이 t7를 다시 만듦!!
-                tr.appendChild(td7);
-                btn2.addEventListener("click", remove);
+                    //수정버튼 추가
+                    const btn1 = document.createElement("button");
+                    btn1.textContent = "수정";
+                    td6.appendChild(btn1);//굳이 t6를 다시 만듦!!
+                    tr.appendChild(td6);
+                    btn1.addEventListener("click", edit);
+
+                    //삭제버튼 추가
+                    const btn2 = document.createElement("button");//버튼 앞에 #붙이면 안
+                    btn2.textContent = "삭제";
+                    td7.appendChild(btn2);//굳이 t7를 다시 만듦!!
+                    tr.appendChild(td7);
+                    btn2.addEventListener("click", remove);
+                }
+                else{
+                    newdata.children[1].textContent = name.value;//a.children[1].textContent가 안되는 이유>>a는 edit이라는 함수에서만 쓰이는 지역함수이기 대문제 edit밖에서는 아무 쓸모가 없음
+                    newdata.children[2].textContent = singer.value;
+                    newdata.children[3].textContent = produser.value;
+                    newdata.children[4].textContent = genre.value;
+                    newdata = null
+                }
             })
         });
 

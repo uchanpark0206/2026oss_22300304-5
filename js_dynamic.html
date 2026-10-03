@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        function delfruit(e){
+            e.target.parentElement.remove();
+
+        }
+
+        window.addEventListener("load",function(){
+            const fruit = document.querySelector("#fruit")
+            const addbtn =document.querySelector("#addbtn")
+            const list =document.querySelector("#list")
+
+            addbtn.addEventListener("click",function(){
+                let flist = fruit.value.split(",");//split(",")은 안의 컨텐트를 기준으로 나눈다는 의미
+                for(const one of flist){//이부분 잘 모름>> 공부 필요 +그냥 if문과의 차이 이해할것
+                    const li = document.createElement("li")
+                    li.textContent = one;
+                    list.appendChild(li);
+
+                   const btn = document.createElement("button");//버튼 앞에 #붙이면 안
+                    btn.textContent="삭제";
+                    li.appendChild(btn);
+                    btn.addEventListener("click",delfruit);
+
+                }
+            })
+        });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+        <input type="text" id="fruit" placeholder="추가하고 싶은 과일을 입력">
+        <button id="addbtn">추가</button><br>
+        <ul id="list">
+        </ul>
+    </main>
+    <footer>
+
+    </footer>
+    
+</body>
+
+</html>
