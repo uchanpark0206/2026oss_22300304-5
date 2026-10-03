@@ -8,7 +8,7 @@
         window.addEventListener("load", function () {
             function remove(e) {
                 e.target.parentElement.parentElement.remove();
-                count --;
+                count--;
 
             }
             const name = document.querySelector("#name")
@@ -41,6 +41,7 @@
                 const td4 = document.createElement("td");
                 const td5 = document.createElement("td");
                 const td6 = document.createElement("td");
+                const td7 = document.createElement("td");
                 count++;
                 datalist[0] = count;
                 datalist[1] = name.value;
@@ -62,12 +63,17 @@
                 tr.appendChild(td4);
                 tr.appendChild(td5);
                 table.appendChild(tr);
-
-                const btn = document.createElement("button");//버튼 앞에 #붙이면 안
-                btn.textContent = "삭제";
-                td6.appendChild(btn);//굳이 t6를 다시 만듦!!
+                const btn1 = document.createElement("button");
+                btn1.textContent = "수정";
+                td6.appendChild(btn1);//굳이 t6를 다시 만듦!!
                 tr.appendChild(td6);
-                btn.addEventListener("click", remove);
+                //btn1.addEventListener("click",);
+
+                const btn2 = document.createElement("button");//버튼 앞에 #붙이면 안
+                btn2.textContent = "삭제";
+                td7.appendChild(btn2);//굳이 t7를 다시 만듦!!
+                tr.appendChild(td7);
+                btn2.addEventListener("click", remove);
             })
         });
 
@@ -86,17 +92,17 @@
             <form>
                 <h2>song_table</h2><!--줄을 맞추고 싶은데-->
                 <label for=""> 제목 </label>
-                <input type="text" id="name" ><br>
+                <input type="text" id="name"><br>
 
 
                 <label for=""> 가수 </label>
-                <input type="text" id="singer" ><br>
+                <input type="text" id="singer"><br>
 
                 <label for=""> 작곡가</label><!--줄을 맞추고 싶은데-->
-                <input type="text" id="produser" ><br>
+                <input type="text" id="produser"><br>
 
                 <label for=""> 장르</label>
-                <input type="text" id="genre" > <br>
+                <input type="text" id="genre"> <br>
 
                 <br>
                 <button id="btn1" type="button">내 음악 추가</button>
@@ -121,7 +127,6 @@
                         <th>가수</th>
                         <th>작곡가</th>
                         <th>장르</th>
-                        <th>관리</th>
                     </tr>
                     <tr>
                         <th>1</th>
@@ -129,8 +134,8 @@
                         <th>b</th>
                         <th>c</th>
                         <th>d</th>
-                        <th><button id=bt1>삭제 </button>
-                        <th>
+                        <th><button id=bt1>수정 </button></th>
+                        <th><button id=bt1>삭제 </button></th>
                     </tr>
                     <tr>
                         <th>2</th>
@@ -138,6 +143,7 @@
                         <th>ㄴ</th>
                         <th>ㄷ</th>
                         <th>ㄹ</th>
+                        <th><button id=bt1>수정 </button></th>
                         <th><button id=bt2>삭제 </button></th><!--.parentElement를 한번만 사용하면 boutton만 삭제됨-->
                     </tr>
 
