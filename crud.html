@@ -1,40 +1,113 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
+    <script>
+        window.addEventListener("load", function () {
+            const name = document.querySelector("#name")
+            const singer = document.querySelector("#singer")
+            const produser = document.querySelector("#produser")
+            const genre = document.querySelector("#genre")
+            const add = document.querySelector("#btn1")
+            const reset = document.querySelector("#btn2")
+
+            const table = document.querySelector("#table")
+
+            let count = Number[0] //변경될거여서 let을 써야함(자주 까먹음)
+
+            add.addEventListener("click", function () {
+                const tr = document.createElement("tr")
+                const td1 = document.createElement("td")//.createElement("td")의 엘리먼트(td)는 html에서 쓰는 테그임!!
+                const td2 = document.createElement("td")
+                const td3 = document.createElement("td")
+                const td4 = document.createElement("td")
+                const td5 = document.createElement("td")
+
+                count = count + 1
+                td1.textContent = count
+                td2.textContent = name.value
+                td3.textContent = singer.value
+                td4.textContent = produser.value
+                td5.textContent = genre.value
+             
+
+
+                tr.appendChild(td1)
+                tr.appendChild(td2)
+                tr.appendChild(td3)
+                tr.appendChild(td4)
+                tr.appendChild(td5)
+                table.appendChild(tr);
+
+                const btn = document.createElement("button");//버튼 앞에 #붙이면 안
+                btn.textContent = "삭제";
+                tr.appendChild(btn);
+            })
+        });
+
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>좋아하는 음악 리스트</title>
-    <body>
+
+<body>
     <div>
-        <header >
-            <h2>내가 좋아하는 음악 리스트</h2>
-        
+        <header>
+            <h1>내가 좋아하는 음악 리스트</h1>
+
         </header>
-        <main >
-            <table >
-                <thead >
+        <main>
+            <form>
+                <h2>song_table</h2><!--줄을 맞추고 싶은데-->
+                <label for=""> 제목 </label>
+                <input type="text" id="name" required><br>
+
+
+                <label for=""> 가수 </label>
+                <input type="text" id="singer" required><br>
+
+                <label for=""> 작곡가</label><!--줄을 맞추고 싶은데-->
+                <input type="text" id="produser" required><br>
+
+                <label for=""> 장르</label>
+                <input type="text" id="genre" required> <br>
+
+                <br>
+                <button id="btn1" type = "button" >내 음악 추가</button>
+                <button id="btn2" type="reset">리셋</button>
+            </form>
+
+
+            -------------------------------------------
+
+
+
+
+
+
+
+
+            <table id="table">
+                <thead>
                     <tr>
                         <th>번호</th>
-                        <th>음악명</th>
+                        <th>제목</th>
                         <th>가수</th>
-                        <th>카테고리</th>
+                        <th>작곡가</th>
+                        <th>장르</th>
                         <th>관리</th>
                     </tr>
-                </thead>
-                 <tbody >
-                </tbody>
+
             </table>
         </main>
         <footer>
-            <form >
-                <button type="submit" >내 음악 추가</button>
-                <button type="reset" >리셋</button>
-            </form> 
         </footer>
     </div>
 
-    </body>
+</body>
+
 </html>
 
 </body>
+
 </html>
