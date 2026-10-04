@@ -107,10 +107,93 @@
         }
     </style>
     <script>
+        let datalist = [
 
+            {
+
+                id: 1,
+
+                title: "HTML",
+
+                author: "Kim",
+
+                category: "Web",
+
+                price: 10000
+
+            },
+
+            {
+
+                id: 2,
+
+                title: "CSS",
+
+                author: "Lee",
+
+                category: "Web",
+
+                price: 12000
+
+            },
+
+            {
+
+                id: 3,
+
+                title: "JavaScript",
+
+                author: "Park",
+
+                category: "Web",
+
+                price: 15000
+
+            }
+
+        ];
 
         window.addEventListener("load", function () {
-            function render() {   /*과제에서 말씀하신 내용이 읽을때 번호를 불러오는거 말씀하신건가?*/
+            const name = document.querySelector("#name")
+            const singer = document.querySelector("#singer")
+            const produser = document.querySelector("#produser")
+            const genre = document.querySelector("#genre")
+            const add = document.querySelector("#btn1")
+            const reset = document.querySelector("#btn2")
+
+            let newdata = null;
+
+            for (let i = 0; i < datalist.length; i++) {
+                const tr = document.createElement("tr");
+
+                for (let j = 0; j < Object.values(datalist[i]).length; j++) {
+                    const td1 = document.createElement("td");          // ← 여기로 이동
+                    td1.textContent = Object.values(datalist[i])[j];
+                    tr.appendChild(td1);
+
+                }
+
+                //수정버튼과 삭제버튼 추가
+
+                //수정버튼
+                const btn1 = document.createElement("button")
+                const P = document.createElement("td")
+                btn1.textContent = "수정";
+                P.appendChild(btn1);
+                tr.appendChild(P)
+                btn1.addEventListener("click", edit);
+
+                //삭제버튼
+                const btn2 = document.createElement("button");
+                const Q = document.createElement("td")
+                btn2.textContent = "삭제";
+                Q.appendChild(btn2);
+                tr.appendChild(Q)
+                btn2.addEventListener("click", remove);
+                table.appendChild(tr);
+            }
+
+            function render() {
                 const detanum = table.querySelectorAll("tr");/*한마디로 테이블의 모든 tr을 대상한다는 의미임,datanum에는 테이블의 tr이 들어감 자동으로 처음 tr을 0으로 간주함*/
                 // detanum[0]은 제목 줄(번호/제목/가수...)이므로 건너뜀
                 for (let i = 1; i < detanum.length; i++) {
@@ -131,7 +214,7 @@
 
             }
             function edit(e) {//젤 어려움
-                const a = e.target.parentElement.parentElement;//쓰임을 아직 잘 모르겠음
+                const a = e.target.parentElement.parentElement;
                 //에딧에서는 datalist를 쓰면 안됨>>datalist는 사용할떄마다 갱신되어 마지막에 남는것만 기억함!!
                 newdata = a;
                 name.value = a.children[1].textContent;
@@ -141,37 +224,7 @@
 
 
             }
-            const name = document.querySelector("#name")
-            const singer = document.querySelector("#singer")
-            const produser = document.querySelector("#produser")
-            const genre = document.querySelector("#genre")
-            const add = document.querySelector("#btn1")
-            const reset = document.querySelector("#btn2")
-
-            //디폴트 테이블의 삭제버튼
-            const bt1 = document.querySelector("#bt1")
-            const bt2 = document.querySelector("#bt2")
-
-            //디폴트 테이블의 수정버튼
-            const bt3 = document.querySelector("#bt3")
-            const bt4 = document.querySelector("#bt4")
-
-            const table = document.querySelector("#table")
-
-            const id = 1
-
-            let newdata = null;
-
-
-            const datalist = [id, name, singer, produser, genre]
-            //const datalist = {"id","제목","가수","작곡가","장르"}>>오류 중괄호 쓰면 됨!!오직 대괄호!!
-            bt1.addEventListener("click", remove);
-            bt2.addEventListener("click", remove);
-
-            bt3.addEventListener("click", edit);
-            bt4.addEventListener("click", edit);
-
-            let count = 2; //변경될거여서 let을 써야함(자주 까먹음)
+            let count = 3; //변경될거여서 let을 써야함(자주 까먹음)
             //대괄호를 쓰면 표에서 NaN뜸>>>>> 자바스크립트에서는 Number[0]을 숫자로 인식하지 않음.
             //애초에 변수 선언시 Number()을 안 써도 됨!!
 
@@ -242,7 +295,6 @@
                     tr.appendChild(td4);
                     tr.appendChild(td5);
                     table.appendChild(tr);
-
                     //수정버튼 추가
                     const btn1 = document.createElement("button");
                     btn1.textContent = "수정";
@@ -253,10 +305,9 @@
                     //삭제버튼 추가
                     const btn2 = document.createElement("button");//버튼 앞에 #붙이면 안
                     btn2.textContent = "삭제";
-                    td7.appendChild(btn2);//굳이 t7를 다시 만듦!!
+                    td7.appendChild(btn2);//굳이 t7를 다시 만들어야!!
                     tr.appendChild(td7);
                     btn2.addEventListener("click", remove);
-
                     //내가 넣은 값을 없애주기
                     name.value = null;
                     singer.value = null;
@@ -292,7 +343,7 @@
     <main>
         <div id="input">
             <form>
-                <h2>song_table</h2><!--줄을 맞추고 싶은데-->
+                <h2>song_table</h2>
                 <label for="name"> 제목 </label>
                 <input type="text" id="name"><br>
 
@@ -300,7 +351,7 @@
                 <label for="singer"> 가수 </label>
                 <input type="text" id="singer"><br>
 
-                <label for="produser"> 작곡가</label><!--줄을 맞추고 싶은데-->
+                <label for="produser"> 작곡가</label>
                 <input type="text" id="produser"><br>
 
                 <label for="genre"> 장르</label>
@@ -323,7 +374,7 @@
         <div id="outcome">
             <h2>내용</h2>
             <table id="table">
-                <tr>
+                <!-- <tr>
                     <th>번호</th>
                     <th>제목</th>
                     <th>가수</th>
@@ -332,28 +383,34 @@
                 </tr>
                 <tr>
                     <th>1</th>
-                    <th>a</th>
-                    <th>b</th>
-                    <th>c</th>
-                    <th>d</th>
+                    <th>오도리코</th>
+                    <th>바운디</th>
+                    <th>바운디</th>
+                    <th>j_pop</th>
                     <th><button id=bt3>수정 </button></th>
                     <th><button id=bt1>삭제 </button></th>
                 </tr>
                 <tr>
                     <th>2</th>
-                    <th>ㄱ</th>
-                    <th>ㄴ</th>
-                    <th>ㄷ</th>
-                    <th>ㄹ</th>
+                    <th>괴수의 꽃노래</th>
+                    <th>바운디</th>
+                    <th>바운디</th>
+                    <th>j_pop</th>
                     <th><button id=bt4>수정 </button></th>
-                    <th><button id=bt2>삭제 </button></th><!--.parentElement를 한번만 사용하면 boutton만 삭제됨-->
+                    <th><button id=bt2>삭제 </button></th>
+                <tr>
+                    <th>3</th>
+                    <th>airis out</th>
+                    <th>요네즈 켄시</th>
+                    <th>요네즈켄시</th>
+                    <th>j_pop</th>
+                    <th><button id=nbtn1>수정 </button></th>
+                    <th><button id=nbtn2>삭제 </button></th>
+                    -->
                 </tr>
             </table>
         </div>
     </main>
-    <footer>
-    </footer>
-
 </body>
 
 </html>
