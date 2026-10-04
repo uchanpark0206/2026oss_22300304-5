@@ -108,52 +108,28 @@
     </style>
     <script>
         let datalist = [
-
             {
-
                 id: 1,
-
-                name: "HTML",
-
-                singer: "Kim",
-
-                produser: "Web",
-
-                genre: 10000
-
+                name: "오도리코",
+                singer: "바운디",
+                produser: "바운디",
+                genre: "j_pop"
             },
-
             {
-
                 id: 2,
-
-                name: "CSS",
-
-                singer: "Lee",
-
-                produser: "Web",
-
-                genre: 12000
-
+                name: "괴수의 꽃노래",
+                singer: "바운디",
+                produser: "바운디",
+                genre: "j_pop"
             },
-
             {
-
                 id: 3,
-
-                name: "JavaScript",
-
-                singer: "Park",
-
-                produser: "Web",
-
-                genre: 15000
-
+                name: "airis out",
+                singer: "요네즈 켄시",
+                produser: "요네즈켄시",
+                genre: "j_pop"
             }
-
-        ];
-
-        window.addEventListener("load", function () {
+        ]; window.addEventListener("load", function () {
             const name = document.querySelector("#name")
             const singer = document.querySelector("#singer")
             const produser = document.querySelector("#produser")
@@ -199,7 +175,7 @@
                 for (let i = 1; i < detanum.length; i++) {
                     detanum[i].children[0].textContent = i;
                 }
-                count = detanum.length ; 
+                count = detanum.length;
             }
 
             function remove(e) {
@@ -281,14 +257,14 @@
                         genre: genre.value
                     };
                     datalist.push(item);
-            
-            
+
+
                     td1.textContent = item.id
                     td2.textContent = item.name
                     td3.textContent = item.singer
                     td4.textContent = item.produser
                     td5.textContent = item.genre
-                    count ++;
+                    count++;
 
 
                     tr.appendChild(td1);
