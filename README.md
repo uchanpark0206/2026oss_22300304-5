@@ -74,4 +74,5 @@ render():직접 만든 함수로 id를 삭제할때 기존에 내장된 테이�
 3. .parentElement와 .children을 이해함
 4. appendChild() 함수를 이해함
 5. querySelectorAll()을 이해함
-6. 
+6.  Object.values()에 대해 알게됨>>어레이의 값을 불러오려면 써야함
+7. datalist.push()을 알게됨 >> 내가 변경한 값들을 datalist라는 어레이에 저장할 떄 사용함
