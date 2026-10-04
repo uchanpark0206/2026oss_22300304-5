@@ -2,19 +2,76 @@
 <html lang="ko">
 
 <head>
+    <style>
+        body {
+            background-color: rgba(235, 192, 131, 0.6);
+            font-family: 'Malgun Gothic', sans-serif;
+            color: #130301;
+            text-align: center;
+        }
+
+        #input {
+            background-color: rgb(247, 199, 96);
+            border-radius: 1rem;
+            /* 모서리 둥글게 */
+            box-shadow: 0 0.4rem 0.5rem;
+            /* 은은한 그림자 */
+            padding-bottom: 15px;
+        }
+
+        #outcome {
+            background-color: rgb(248, 253, 249);
+            border-radius: 1rem;
+            /* 모서리 둥글게 */
+            box-shadow: 0 0.4rem 0.5rem;
+            /* 은은한 그림자 */
+
+        }
+        form{ 
+
+
+        }
+
+        h2 {
+            background-color: green;
+            border-radius: 1rem;
+            /* 모서리 둥글게 */
+        }
+
+
+
+        button {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            /* 마우스 올렸을 때 애니메이션 */
+        }
+
+        table th,
+        table td {
+            font-weight: normal;
+            text-align: center;
+        }
+    </style>
     <script>
 
 
         window.addEventListener("load", function () {
+
             function remove(e) {
-                e.target.parentElement.parentElement.remove();
-                count--;
+                if (confirm("삭제하시겠습니까?")) {
+                    e.target.parentElement.parentElement.remove();
+                    count--;
+                }
+
 
             }
             function edit(e) {//젤 어려움
                 const a = e.target.parentElement.parentElement;//쓰임을 아직 잘 모르겠음
                 //에딧에서는 datalist를 쓰면 안됨>>datalist는 사용할떄마다 갱신되어 마지막에 남는것만 기억함!!
-                newdata=a;
+                newdata = a;
                 name.value = a.children[1].textContent;
                 singer.value = a.children[2].textContent;
                 produser.value = a.children[3].textContent;
@@ -57,6 +114,39 @@
             //애초에 변수 선언시 Number()을 안 써도 됨!!
 
             add.addEventListener("click", function () {
+                //validation
+                if (name.value.trim() === "") {
+
+                    alert("가수를 입력하세요.");
+
+                    name.focus();
+                    return;
+                }
+
+                else if (singer.value.trim() === "") {
+
+                    alert("가수를 입력하세요.");
+
+                    singer.focus();
+                    return;
+                }
+
+                else if (produser.value.trim() === "") {
+
+                    alert("작곡가를 입력하세요.");
+
+                    produser.focus();
+                    return;
+                }
+
+                else if (genre.value.trim() === "") {
+
+                    alert("장르를 입력하세요.");
+
+                    genre.focus();
+                    return;
+                }
+
                 if (newdata == null) {
                     //새로운 '칸'만들기
                     const tr = document.createElement("tr");
@@ -105,7 +195,7 @@
                     tr.appendChild(td7);
                     btn2.addEventListener("click", remove);
                 }
-                else{
+                else {
                     newdata.children[1].textContent = name.value;//a.children[1].textContent가 안되는 이유>>a는 edit이라는 함수에서만 쓰이는 지역함수이기 대문제 edit밖에서는 아무 쓸모가 없음
                     newdata.children[2].textContent = singer.value;
                     newdata.children[3].textContent = produser.value;
@@ -121,12 +211,12 @@
     <title>좋아하는 음악 리스트</title>
 
 <body>
-    <div>
-        <header>
-            <h1>내가 좋아하는 음악 리스트</h1>
+    <header>
+        <h1>내가 좋아하는 음악 리스트</h1>
 
-        </header>
-        <main>
+    </header>
+    <main>
+        <div id="input">
             <form>
                 <h2>song_table</h2><!--줄을 맞추고 싶은데-->
                 <label for=""> 제목 </label>
@@ -147,9 +237,7 @@
                 <button id="btn2" type="reset">리셋</button>
             </form>
 
-
-            -------------------------------------------
-
+        </div>
 
 
 
@@ -157,6 +245,9 @@
 
 
 
+
+        <div id="outcome">
+            <h2>내용</h2>
             <table id="table">
                 <thead>
                     <tr>
@@ -186,10 +277,10 @@
                     </tr>
 
             </table>
-        </main>
-        <footer>
-        </footer>
-    </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
 
 </body>
 
