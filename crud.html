@@ -113,13 +113,13 @@
 
                 id: 1,
 
-                title: "HTML",
+                name: "HTML",
 
-                author: "Kim",
+                singer: "Kim",
 
-                category: "Web",
+                produser: "Web",
 
-                price: 10000
+                genre: 10000
 
             },
 
@@ -127,13 +127,13 @@
 
                 id: 2,
 
-                title: "CSS",
+                name: "CSS",
 
-                author: "Lee",
+                singer: "Lee",
 
-                category: "Web",
+                produser: "Web",
 
-                price: 12000
+                genre: 12000
 
             },
 
@@ -141,13 +141,13 @@
 
                 id: 3,
 
-                title: "JavaScript",
+                name: "JavaScript",
 
-                author: "Park",
+                singer: "Park",
 
-                category: "Web",
+                produser: "Web",
 
-                price: 15000
+                genre: 15000
 
             }
 
@@ -163,9 +163,10 @@
 
             let newdata = null;
 
+            let count = 4;
+
             for (let i = 0; i < datalist.length; i++) {
                 const tr = document.createElement("tr");
-
                 for (let j = 0; j < Object.values(datalist[i]).length; j++) {
                     const td1 = document.createElement("td");          // ← 여기로 이동
                     td1.textContent = Object.values(datalist[i])[j];
@@ -195,11 +196,10 @@
 
             function render() {
                 const detanum = table.querySelectorAll("tr");/*한마디로 테이블의 모든 tr을 대상한다는 의미임,datanum에는 테이블의 tr이 들어감 자동으로 처음 tr을 0으로 간주함*/
-                // detanum[0]은 제목 줄(번호/제목/가수...)이므로 건너뜀
                 for (let i = 1; i < detanum.length; i++) {
                     detanum[i].children[0].textContent = i;
                 }
-                count = detanum.length - 1; // 다음 추가될 번호의 기준도 맞춰줌
+                count = detanum.length ; 
             }
 
             function remove(e) {
@@ -224,9 +224,7 @@
 
 
             }
-            let count = 3; //변경될거여서 let을 써야함(자주 까먹음)
-            //대괄호를 쓰면 표에서 NaN뜸>>>>> 자바스크립트에서는 Number[0]을 숫자로 인식하지 않음.
-            //애초에 변수 선언시 Number()을 안 써도 됨!!
+
 
             add.addEventListener("click", function () {
                 //validation
@@ -272,21 +270,25 @@
                     const td5 = document.createElement("td");
                     const td6 = document.createElement("td");
                     const td7 = document.createElement("td");
-                    count++;// id의 번호를 변화시키기 위해
 
                     //데이터를 넣음
-                    datalist[0] = count;
-                    datalist[1] = name.value;
-                    datalist[2] = singer.value;
-                    datalist[3] = produser.value;
-                    datalist[4] = genre.value;
 
-                    td1.textContent = datalist[0];
-                    td2.textContent = datalist[1];
-                    td3.textContent = datalist[2];
-                    td4.textContent = datalist[3];
-                    td5.textContent = datalist[4];
-
+                    const item = {
+                        id: count,
+                        name: name.value,
+                        singer: singer.value,
+                        produser: produser.value,
+                        genre: genre.value
+                    };
+                    datalist.push(item);
+            
+            
+                    td1.textContent = item.id
+                    td2.textContent = item.name
+                    td3.textContent = item.singer
+                    td4.textContent = item.produser
+                    td5.textContent = item.genre
+                    count ++;
 
 
                     tr.appendChild(td1);
@@ -295,17 +297,18 @@
                     tr.appendChild(td4);
                     tr.appendChild(td5);
                     table.appendChild(tr);
+
                     //수정버튼 추가
                     const btn1 = document.createElement("button");
                     btn1.textContent = "수정";
-                    td6.appendChild(btn1);//굳이 t6를 다시 만듦!!
+                    td6.appendChild(btn1);
                     tr.appendChild(td6);
                     btn1.addEventListener("click", edit);
 
                     //삭제버튼 추가
                     const btn2 = document.createElement("button");//버튼 앞에 #붙이면 안
                     btn2.textContent = "삭제";
-                    td7.appendChild(btn2);//굳이 t7를 다시 만들어야!!
+                    td7.appendChild(btn2);
                     tr.appendChild(td7);
                     btn2.addEventListener("click", remove);
                     //내가 넣은 값을 없애주기
@@ -374,13 +377,14 @@
         <div id="outcome">
             <h2>내용</h2>
             <table id="table">
-                <!-- <tr>
+                <tr>
                     <th>번호</th>
                     <th>제목</th>
                     <th>가수</th>
                     <th>작곡가</th>
                     <th>장르</th>
                 </tr>
+                <!--
                 <tr>
                     <th>1</th>
                     <th>오도리코</th>

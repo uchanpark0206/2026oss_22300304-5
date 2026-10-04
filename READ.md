@@ -3,7 +3,7 @@ CRUD Service
 구현한 서비스 주제
 
 사용하는 데이터 Field
-label,input,button,button[reset]
+id 제목 가수 작곡가 장르
 
 Create / Read / Update / Delete 구현 방법
 
@@ -74,3 +74,4 @@ render():직접 만든 함수로 id를 삭제할때 기존에 내장된 테이�
 3. .parentElement와 .children을 이해함
 4. appendChild() 함수를 이해함
 5. querySelectorAll()을 이해함
+6. 
