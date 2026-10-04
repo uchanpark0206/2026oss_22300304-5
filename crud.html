@@ -5,13 +5,13 @@
     <style>
         body {
             background-color: rgba(235, 192, 131, 0.6);
-            font-family: 'Malgun Gothic', sans-serif;
             color: #130301;
             text-align: center;
         }
 
         #input {
-            background-color: rgb(247, 199, 96);
+            /*#중요!!*/
+            background-color: rgb(189, 235, 203);
             border-radius: 1rem;
             /* 모서리 둥글게 */
             box-shadow: 0 0.4rem 0.5rem;
@@ -20,16 +20,65 @@
         }
 
         #outcome {
-            background-color: rgb(248, 253, 249);
+            background-color: rgb(201, 233, 207);
             border-radius: 1rem;
-            /* 모서리 둥글게 */
             box-shadow: 0 0.4rem 0.5rem;
-            /* 은은한 그림자 */
+
 
         }
-        form{ 
+
+        button[type=button],
+        button[type=reset] {
+            background-color: #06f311;
+            color: rgb(13, 13, 13);
+            padding: 14px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            /*
+            cursor: pointer;
+            커서를 손가락 모양으로 만들어줌
+            필요 없어서 제거
+            */
+            box-shadow: 0 0.4rem 0.5rem;
+            /* 은은한 그림자 */
+            border-radius: 1rem;
+            /* 모서리 둥글게 */
+        }
 
 
+
+        label {
+            padding-inline: 10px;
+            /*padding-left: 10px; + padding-right: 10px;과 동일*/
+
+            display: inline-block;
+            width: 80px;
+            /*라벨은 인라인 테그임!!>>>> display: inline-block;를 같이 써줘야함*/
+            background-color: #f0f0f3;
+            text-align: center;
+
+
+
+        }
+
+        input:hover {
+            box-sizing: border-box;
+            /*font-family: inherit;이걸 쓰면 input의 박스가 커짐*/
+            background-color: rgb(112, 228, 145);
+
+        }
+
+
+        button[type=button]:hover,
+        button[type=reset]:hover {
+            background-color: #2528eb;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            font-family: inherit;
+            background-color: aqua;
         }
 
         h2 {
@@ -44,26 +93,39 @@
             padding: 5px 10px;
             border-radius: 5px;
             font-weight: bold;
-            cursor: pointer;
             transition: all 0.2s;
-            /* 마우스 올렸을 때 애니메이션 */
+        }
+
+        table {
+            margin: 0 auto;
+            /*0:위라애 의 마진을 0으로 두겠다는 의미, auto: 양옆의 중앙을 자동으로 나누겠다*/
         }
 
         table th,
-        table td {
-            font-weight: normal;
-            text-align: center;
+        table tr {
+            background-color: white;
         }
     </style>
     <script>
 
 
         window.addEventListener("load", function () {
+            function render() {   /*과제에서 말씀하신 내용이 읽을때 번호를 불러오는거 말씀하신건가?*/
+                const detanum = table.querySelectorAll("tr");/*한마디로 테이블의 모든 tr을 대상한다는 의미임,datanum에는 테이블의 tr이 들어감 자동으로 처음 tr을 0으로 간주함*/
+                // detanum[0]은 제목 줄(번호/제목/가수...)이므로 건너뜀
+                for (let i = 1; i < detanum.length; i++) {
+                    detanum[i].children[0].textContent = i;
+                }
+                count = detanum.length - 1; // 다음 추가될 번호의 기준도 맞춰줌
+            }
 
             function remove(e) {
                 if (confirm("삭제하시겠습니까?")) {
+                    const a = e.target.parentElement.parentElement;
+                    //if(a.children[0] == 1){}
                     e.target.parentElement.parentElement.remove();
-                    count--;
+                    render()
+
                 }
 
 
@@ -147,7 +209,7 @@
                     return;
                 }
 
-                if (newdata == null) {
+                if (newdata == null) {//수정으로 들어온게 아니라면
                     //새로운 '칸'만들기
                     const tr = document.createElement("tr");
                     const td1 = document.createElement("td")//.createElement("td")의tr은 html에서 쓰는 테그임!!>>내가 지정한거 쓰면 안됨ex)t1(X)
@@ -194,6 +256,13 @@
                     td7.appendChild(btn2);//굳이 t7를 다시 만듦!!
                     tr.appendChild(td7);
                     btn2.addEventListener("click", remove);
+
+                    //내가 넣은 값을 없애주기
+                    name.value = null;
+                    singer.value = null;
+                    produser.value = null;
+                    genre.value = null;
+
                 }
                 else {
                     newdata.children[1].textContent = name.value;//a.children[1].textContent가 안되는 이유>>a는 edit이라는 함수에서만 쓰이는 지역함수이기 대문제 edit밖에서는 아무 쓸모가 없음
@@ -201,6 +270,11 @@
                     newdata.children[3].textContent = produser.value;
                     newdata.children[4].textContent = genre.value;
                     newdata = null
+                    //내가 넣은 값을 없애주기
+                    name.value = null;
+                    singer.value = null;
+                    produser.value = null;
+                    genre.value = null;
                 }
             })
         });
@@ -219,21 +293,21 @@
         <div id="input">
             <form>
                 <h2>song_table</h2><!--줄을 맞추고 싶은데-->
-                <label for=""> 제목 </label>
+                <label for="name"> 제목 </label>
                 <input type="text" id="name"><br>
 
 
-                <label for=""> 가수 </label>
+                <label for="singer"> 가수 </label>
                 <input type="text" id="singer"><br>
 
-                <label for=""> 작곡가</label><!--줄을 맞추고 싶은데-->
+                <label for="produser"> 작곡가</label><!--줄을 맞추고 싶은데-->
                 <input type="text" id="produser"><br>
 
-                <label for=""> 장르</label>
+                <label for="genre"> 장르</label>
                 <input type="text" id="genre"> <br>
 
                 <br>
-                <button id="btn1" type="button">내 음악 추가</button>
+                <button id="btn1" type="button">추가/수정</button>
                 <button id="btn2" type="reset">리셋</button>
             </form>
 
@@ -249,33 +323,31 @@
         <div id="outcome">
             <h2>내용</h2>
             <table id="table">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>가수</th>
-                        <th>작곡가</th>
-                        <th>장르</th>
-                    </tr>
-                    <tr>
-                        <th>1</th>
-                        <th>a</th>
-                        <th>b</th>
-                        <th>c</th>
-                        <th>d</th>
-                        <th><button id=bt3>수정 </button></th>
-                        <th><button id=bt1>삭제 </button></th>
-                    </tr>
-                    <tr>
-                        <th>2</th>
-                        <th>ㄱ</th>
-                        <th>ㄴ</th>
-                        <th>ㄷ</th>
-                        <th>ㄹ</th>
-                        <th><button id=bt4>수정 </button></th>
-                        <th><button id=bt2>삭제 </button></th><!--.parentElement를 한번만 사용하면 boutton만 삭제됨-->
-                    </tr>
-
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>가수</th>
+                    <th>작곡가</th>
+                    <th>장르</th>
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <th>a</th>
+                    <th>b</th>
+                    <th>c</th>
+                    <th>d</th>
+                    <th><button id=bt3>수정 </button></th>
+                    <th><button id=bt1>삭제 </button></th>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <th>ㄱ</th>
+                    <th>ㄴ</th>
+                    <th>ㄷ</th>
+                    <th>ㄹ</th>
+                    <th><button id=bt4>수정 </button></th>
+                    <th><button id=bt2>삭제 </button></th><!--.parentElement를 한번만 사용하면 boutton만 삭제됨-->
+                </tr>
             </table>
         </div>
     </main>
